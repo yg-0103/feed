@@ -16,6 +16,7 @@
 
     p {
       color: $color-gray_04;
+
       @include textEllipsis;
     }
   }
@@ -40,5 +41,9 @@
     display: block;
     content: '';
     clear: both;
+  }
+
+  & + & {
+    margin-top: 20px;
   }
 }

@@ -5,18 +5,10 @@ import FeedActionbar from './components/FeedActionbar/FeedActionbar';
 import FeedItem from './components/FeedItem/FeedItem';
 import FeedItemInfo from './components/FeedItemInfo/FeedItemInfo';
 import FeedItemSponsored from './components/FeedItemSponsored/FeedItemSponsored';
+import Feed from './pages/Feed/Feed';
 
 function App() {
-  return (
-    <div>
-      <Button>로그인</Button>
-      <FeedActionbar />
-      <FeedItem>
-        <FeedItemInfo />
-      </FeedItem>
-      <FeedItemSponsored />
-    </div>
-  );
+  return <Feed />;
 }
 
 export default App;

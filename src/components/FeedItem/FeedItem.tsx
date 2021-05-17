@@ -9,7 +9,7 @@ type FeedItemProps = {
 
 function FeedItem({ children, sponsored }: FeedItemProps) {
   return (
-    <article className="FeedItem-container">
+    <li className="FeedItem-container">
       <Link to="/">
         {children}
         <div
@@ -37,7 +37,7 @@ function FeedItem({ children, sponsored }: FeedItemProps) {
           </p>
         </div>
       </Link>
-    </article>
+    </li>
   );
 }
 

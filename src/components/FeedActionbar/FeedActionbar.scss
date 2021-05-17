@@ -2,11 +2,11 @@
 
 .FeedActionbar-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
   ul {
     display: flex;
-
+    margin-bottom: 14px;
     li {
       display: flex;
       align-items: center;

@@ -1,0 +1,14 @@
+.Feed-container {
+  display: flex;
+  max-width: 1140px;
+  margin: 0 auto;
+
+  .Feed-btn-container {
+    max-width: 265px;
+    margin-right: 40px;
+  }
+
+  .Feed-FeedList-container {
+    max-width: 865px;
+  }
+}
