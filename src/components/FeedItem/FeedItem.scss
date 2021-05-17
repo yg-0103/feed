@@ -1,0 +1,51 @@
+@import '../../styles/variable.scss';
+@import '../../styles/mixin.scss';
+
+.FeedItem-container {
+  padding: 20px 30px;
+  border: 1px solid $color-gray_01;
+  border-radius: 4px;
+
+  .FeedItem-header {
+    display: flex;
+    justify-content: space-between;
+    color: $color-gray_02;
+    font-size: $font-small;
+    padding-bottom: 11px;
+    border-bottom: 1px solid $color-gray_01;
+    .category {
+      color: $color-gray_03;
+    }
+  }
+
+  .FeedItem-info {
+    font-size: $font-small;
+    margin: 15px 0;
+
+    .user-id {
+      display: inline-block;
+      color: $color-green;
+      padding-right: 10px;
+      border-right: 1px solid $color-gray_01;
+    }
+
+    .created-at {
+      display: inline-block;
+      padding-left: 10px;
+    }
+  }
+
+  .FeedItem-content {
+    h2 {
+      font-size: $font-large;
+      margin: 17px 0;
+      color: $color-black;
+      @include textEllipsis;
+    }
+
+    p {
+      color: $color-gray_04;
+      @include textEllipsis;
+    }
+  }
+}
