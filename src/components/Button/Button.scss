@@ -1,0 +1,12 @@
+@import '../../styles/variable.scss';
+
+.Button-btn-login {
+  background-color: $color-green;
+  width: 235px;
+  height: 60px;
+  color: $color-white;
+  border: none;
+  border-radius: 5px;
+  padding: 0;
+  font-size: $font-xlarge;
+}
