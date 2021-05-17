@@ -1,20 +1,32 @@
 import React from 'react';
-import FeedActionbar from '../../components/FeedActionbar/FeedActionbar';
 import FeedItem from '../../components/FeedItem/FeedItem';
 import FeedItemInfo from '../../components/FeedItemInfo/FeedItemInfo';
 import FeedItemSponsored from '../../components/FeedItemSponsored/FeedItemSponsored';
+import { Feed } from '../../types/feedType';
 
-function FeedList() {
+type FeedListProps = {
+  feedList: Feed[];
+};
+
+function FeedList({ feedList }: FeedListProps) {
   return (
     <ul>
-      <FeedItem title="" content="">
-        <FeedItemInfo
-          categoryId={1}
-          userId={1}
-          createdAt={new Date().toLocaleDateString()}
-        />
-      </FeedItem>
-      <FeedItemSponsored title="" content="" />
+      {feedList.map((feed, i) => (
+        <>
+          <FeedItem title={feed.title} content={feed.contents}>
+            <FeedItemInfo
+              categoryId={feed.category_id}
+              userId={feed.user_id}
+              createdAt={feed.created_at}
+            />
+          </FeedItem>
+          {i === 0
+            ? null
+            : i % 3 === 0 && (
+                <FeedItemSponsored title={feed.title} content={feed.contents} />
+              )}
+        </>
+      ))}
     </ul>
   );
 }
