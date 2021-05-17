@@ -3,3 +3,15 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+@mixin clearTextEllipsis() {
+  text-overflow: initial;
+  white-space: initial;
+}
+
+@mixin webkitMultilineEllipsis($clamp) {
+  display: -webkit-box;
+  -webkit-line-clamp: $clamp;
+  -webkit-box-orient: vertical;
+  line-height: 1.5;
+}
