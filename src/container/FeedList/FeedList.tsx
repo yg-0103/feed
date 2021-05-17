@@ -7,10 +7,14 @@ import FeedItemSponsored from '../../components/FeedItemSponsored/FeedItemSponso
 function FeedList() {
   return (
     <ul>
-      <FeedItem>
-        <FeedItemInfo />
+      <FeedItem title="" content="">
+        <FeedItemInfo
+          categoryId={1}
+          userId={1}
+          createdAt={new Date().toLocaleDateString()}
+        />
       </FeedItem>
-      <FeedItemSponsored />
+      <FeedItemSponsored title="" content="" />
     </ul>
   );
 }

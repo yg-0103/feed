@@ -2,9 +2,14 @@ import React from 'react';
 import FeedItem from '../FeedItem/FeedItem';
 import './FeedItemSponsored.scss';
 
-function FeedItemSponsored() {
+type FeedItemSponsoredProps = {
+  title: string;
+  content: string;
+};
+
+function FeedItemSponsored({ title, content }: FeedItemSponsoredProps) {
   return (
-    <FeedItem sponsored>
+    <FeedItem title={title} content={content} sponsored>
       <span className="FeedItemSponsored-heading">sponsored</span>
     </FeedItem>
   );
