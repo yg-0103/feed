@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 import { FeedCategoryData, FeedCategoryState } from '../types/feedCategoryType';
 import * as feedApi from '../api/feedApi';
-import { stat } from 'fs';
 
 const GET_FEEDCATEGORY = 'feedCategory/GET_FEEDCATEGORY' as const;
 const GET_FEEDCATEGORY_SUCCESS = 'feedDetail/GET_FEEDCATEGORY_SUCCESS' as const;

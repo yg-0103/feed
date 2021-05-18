@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalCheckbox from '../../components/ModalCheckbox/ModalCheckbox';
 import Button from '../../components/Button/Button';
 import './FeedFilterModal.scss';
@@ -6,12 +6,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
 import { getFeedCategoryThunk } from '../../module/feedCategory';
 
-function FeedFilterModal() {
+type FeedFilterModalProps = {
+  onClick: () => void;
+  handleChangeCategory: (category: string[]) => void;
+};
+
+function FeedFilterModal({
+  onClick,
+  handleChangeCategory,
+}: FeedFilterModalProps) {
   const { data: feedCategoryState } = useSelector(
     (state: RootState) => state.feedCategoryState
   );
+
+  const [category, setCategory] = useState<string[]>([]);
+
   const dispatch = useDispatch();
 
+  const handleSetCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const newCategory = new Set([...category, `${name}=${value}`]);
+
+    setCategory([...newCategory]);
+  };
+
+  const handleSave = () => {
+    handleChangeCategory(category);
+    onClick();
+  };
   useEffect(() => {
     dispatch(getFeedCategoryThunk());
   }, [dispatch]);
@@ -24,13 +46,22 @@ function FeedFilterModal() {
           {feedCategoryState &&
             feedCategoryState.category.map(category => (
               <li key={category.id}>
-                <ModalCheckbox id={category.id} categoryName={category.name} />
+                <ModalCheckbox
+                  id={category.id}
+                  categoryName={category.name}
+                  handleSetCategory={handleSetCategory}
+                  name="&category[]"
+                />
               </li>
             ))}
         </ul>
         <div>
-          <Button className="FeedFilterModal-btn-save">저장하기</Button>
-          <button className="FeedFilterModal-btn-close">x</button>
+          <Button className="FeedFilterModal-btn-save" onClick={handleSave}>
+            저장하기
+          </Button>
+          <button className="FeedFilterModal-btn-close" onClick={onClick}>
+            x
+          </button>
         </div>
       </div>
     </div>

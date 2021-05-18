@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FeedActionbar from '../../components/FeedActionbar/FeedActionbar';
+import FeedActionbar from '../../container/FeedActionbar/FeedActionbar';
 import FeedList from '../../container/FeedList/FeedList';
 import Button from '../../components/Button/Button';
 import './Feed.scss';
@@ -11,18 +11,26 @@ function Feed() {
   const { data: feedState, loading, error } = useSelector(
     (state: RootState) => state.feedState.feeds
   );
-
   const [sortState, setSortState] = useState('asc');
+  const [feedCategory, setFeedCategory] = useState([
+    '&category[]=1',
+    '&category[]=2',
+    '&category[]=3',
+  ]);
   const dispatch = useDispatch();
 
-  const handleSetSort = (ord: string) => {
+  const handleSort = (ord: string) => {
     setSortState(ord);
   };
 
+  const handleChangeCategory = (category: string[]) => {
+    setFeedCategory(category);
+  };
+
   useEffect(() => {
-    dispatch(getFeedsThunk(sortState));
+    dispatch(getFeedsThunk(sortState, feedCategory.join('')));
     dispatch(getFeedAbsThunk());
-  }, [dispatch, sortState]);
+  }, [dispatch, sortState, feedCategory]);
 
   return (
     <div className="Feed-container">
@@ -30,7 +38,10 @@ function Feed() {
         <Button>로그인</Button>
       </div>
       <div className="Feed-FeedList-container">
-        <FeedActionbar handleSetSort={handleSetSort} />
+        <FeedActionbar
+          handleSort={handleSort}
+          handleChangeCategory={handleChangeCategory}
+        />
         {loading && <div>로딩중...</div>}
         {error && <div>에러 발생 </div>}
         {feedState && <FeedList feedList={feedState.data} />}
