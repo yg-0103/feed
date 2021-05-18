@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FeedDetailData } from '../types/feedDetailType';
 import { FeedAbsData, FeedData } from '../types/feedType';
 
 const baseUrl = 'https://problem.comento.kr/api';
@@ -9,6 +10,14 @@ export const getFeedAll = async (ord: string) => {
   );
 
   return feedData;
+};
+
+export const getFeed = async (id: number) => {
+  const { data: feedDetailData } = await axios.get<FeedDetailData>(
+    `${baseUrl}/view?id=${id}`
+  );
+
+  return feedDetailData;
 };
 
 export const getFeedAbs = async () => {

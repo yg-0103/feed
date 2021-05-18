@@ -55,11 +55,6 @@ export type FeedState = {
     data: null | FeedData;
     error: null | Error;
   };
-  feed: {
-    loading: boolean;
-    data: null | FeedData;
-    error: null | Error;
-  };
   feedAbs: {
     loading: boolean;
     data: null | FeedAbsData;

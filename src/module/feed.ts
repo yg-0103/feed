@@ -53,11 +53,6 @@ type FeedAction =
   | ReturnType<typeof getFeedAbsError>;
 
 const initialState: FeedState = {
-  feed: {
-    loading: false,
-    data: null,
-    error: null,
-  },
   feeds: {
     loading: false,
     data: null,

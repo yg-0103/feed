@@ -8,6 +8,7 @@ type FeedItemProps = {
   children: React.ReactNode;
   sponsored?: boolean;
   imagePath?: string;
+  id?: number;
 };
 
 function FeedItem({
@@ -16,10 +17,11 @@ function FeedItem({
   title,
   content,
   imagePath,
+  id,
 }: FeedItemProps) {
   return (
     <li className="FeedItem-container">
-      <Link to="/">
+      <Link to={`/${id}`}>
         {children}
         <div
           className={`FeedItem-content ${
