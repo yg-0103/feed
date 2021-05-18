@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import FeedItem from '../../components/FeedItem/FeedItem';
 import FeedItemInfo from '../../components/FeedItemInfo/FeedItemInfo';
 import FeedItemSponsored from '../../components/FeedItemSponsored/FeedItemSponsored';
+import { RootState } from '../../module';
 import { Feed } from '../../types/feedType';
 
 type FeedListProps = {
@@ -9,23 +11,33 @@ type FeedListProps = {
 };
 
 function FeedList({ feedList }: FeedListProps) {
+  const { data: feedAbsData } = useSelector(
+    (state: RootState) => state.feedState.feedAbs
+  );
+
   return (
     <ul>
       {feedList.map((feed, i) => (
-        <>
+        <React.Fragment key={feed.id}>
+          {i === 0
+            ? null
+            : i % 3 === 0 &&
+              feedAbsData && (
+                <FeedItemSponsored
+                  key={i}
+                  title={feedAbsData.data[i / 3 - 1].title}
+                  content={feedAbsData.data[i / 3 - 1].contents}
+                />
+              )}
           <FeedItem title={feed.title} content={feed.contents}>
             <FeedItemInfo
+              key={i}
               categoryId={feed.category_id}
               userId={feed.user_id}
               createdAt={feed.created_at}
             />
           </FeedItem>
-          {i === 0
-            ? null
-            : i % 3 === 0 && (
-                <FeedItemSponsored title={feed.title} content={feed.contents} />
-              )}
-        </>
+        </React.Fragment>
       ))}
     </ul>
   );

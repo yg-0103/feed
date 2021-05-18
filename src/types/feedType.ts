@@ -24,6 +24,31 @@ export type Feed = {
   updated_at: Date;
 };
 
+export type FeedAbsData = {
+  current_page: number;
+  data: FeedAbs[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: Link[];
+  next_page_url: string;
+  path: string;
+  per_page: number;
+  prev_page_url: null;
+  to: number;
+  total: number;
+};
+
+export type FeedAbs = {
+  id: number;
+  title: string;
+  contents: string;
+  img: string;
+  created_at: Date;
+  updated_at: Date;
+};
+
 export type FeedState = {
   feeds: {
     loading: boolean;
@@ -33,6 +58,11 @@ export type FeedState = {
   feed: {
     loading: boolean;
     data: null | FeedData;
+    error: null | Error;
+  };
+  feedAbs: {
+    loading: boolean;
+    data: null | FeedAbsData;
     error: null | Error;
   };
 };

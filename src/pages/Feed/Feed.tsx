@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import './Feed.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module';
-import { getFeedsThunk } from '../../module/feed';
+import { getFeedAbsThunk, getFeedsThunk } from '../../module/feed';
 
 function Feed() {
   const { data: feedState, loading, error } = useSelector(
@@ -16,6 +16,7 @@ function Feed() {
 
   useEffect(() => {
     dispatch(getFeedsThunk());
+    dispatch(getFeedAbsThunk());
   }, [dispatch]);
 
   return (

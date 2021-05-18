@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import Button from '../Button/Button';
 import './FeedActionbar.scss';
 
-type FeedActionbarProps = {};
-
 function FeedActionbar() {
   return (
     <div className="FeedActionbar-container">
