@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import FeedActionbar from '../../container/FeedActionbar/FeedActionbar';
-import FeedList from '../../container/FeedList/FeedList';
-import Button from '../../components/Button/Button';
+import FeedActionbar from 'container/FeedActionbar/FeedActionbar';
+import FeedList from 'container/FeedList/FeedList';
+import Button from 'components/Button/Button';
 import './Feed.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../module';
+import { RootState } from 'modules';
 import {
   getFeedAbsThunk,
   getFeedsThunk,
   loadMoreFeedThunk,
-} from '../../module/feed';
-import { debounce } from '../../utils/debounce';
+} from 'modules/feed';
+import { debounce } from 'utils/debounce';
 
 function Feed() {
   const { data: feedState, loading, error } = useSelector(

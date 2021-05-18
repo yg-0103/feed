@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ModalCheckbox from '../../components/ModalCheckbox/ModalCheckbox';
-import Button from '../../components/Button/Button';
+import ModalCheckbox from 'components/ModalCheckbox/ModalCheckbox';
+import Button from 'components/Button/Button';
 import './FeedFilterModal.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../module';
-import { getFeedCategoryThunk } from '../../module/feedCategory';
+import { RootState } from 'modules';
+import { getFeedCategoryThunk } from 'modules/feedCategory';
 
 type FeedFilterModalProps = {
   onClick: () => void;

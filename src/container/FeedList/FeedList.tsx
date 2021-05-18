@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import FeedItem from '../../components/FeedItem/FeedItem';
-import FeedItemInfo from '../../components/FeedItemInfo/FeedItemInfo';
-import FeedItemSponsored from '../../components/FeedItemSponsored/FeedItemSponsored';
-import { RootState } from '../../module';
-import { Feed } from '../../types/feedType';
-import { timeFormat } from '../../utils/timeFormat';
+import FeedItem from 'components/FeedItem/FeedItem';
+import FeedItemInfo from 'components/FeedItemInfo/FeedItemInfo';
+import FeedItemSponsored from 'components/FeedItemSponsored/FeedItemSponsored';
+import { RootState } from 'modules';
+import { Feed } from 'types/feedType';
+import { timeFormat } from 'utils/timeFormat';
 
 type FeedListProps = {
   feedList: Feed[];

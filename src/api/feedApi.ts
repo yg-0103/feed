@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { FeedCategoryData } from '../types/feedCategoryType';
-import { FeedDetailData } from '../types/feedDetailType';
-import { FeedAbsData, FeedData } from '../types/feedType';
+import { FeedCategoryData } from 'types/feedCategoryType';
+import { FeedDetailData } from 'types/feedDetailType';
+import { FeedAbsData, FeedData } from 'types/feedType';
 
 const baseUrl = 'https://problem.comento.kr/api';
 

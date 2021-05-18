@@ -5,8 +5,8 @@ import {
   FeedAbsData,
   FeedData,
   FeedState,
-} from '../types/feedType';
-import * as feedApi from '../api/feedApi';
+} from 'types/feedType';
+import * as feedApi from 'api/feedApi';
 
 const GET_FEEDS = 'feed/GET_FEEDS' as const;
 const GET_FEEDS_SUCCESS = 'feed/GET_FEEDS_SUCCESS' as const;

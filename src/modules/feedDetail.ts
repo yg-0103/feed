@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import { FeedDetailData, FeedDetailState } from '../types/feedDetailType';
-import * as feedApi from '../api/feedApi';
+import { FeedDetailData, FeedDetailState } from 'types/feedDetailType';
+import * as feedApi from 'api/feedApi';
 
 const GET_FEED = 'feedDetail/GET_FEED' as const;
 const GET_FEED_SUCCESS = 'feedDetail/GET_FEED_SUCCESS' as const;

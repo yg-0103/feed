@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Button from '../../components/Button/Button';
-import FeedFilterModal from '../FeedFilterModal/FeedFilterModal';
+import Button from 'components/Button/Button';
+import FeedFilterModal from 'container/FeedFilterModal/FeedFilterModal';
 import './FeedActionbar.scss';
 
 type FeedActionbarProps = {

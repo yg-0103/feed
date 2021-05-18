@@ -1,5 +1,5 @@
 import React from 'react';
-import FeedItem from '../FeedItem/FeedItem';
+import FeedItem from 'components/FeedItem/FeedItem';
 import './FeedItemSponsored.scss';
 
 type FeedItemSponsoredProps = {

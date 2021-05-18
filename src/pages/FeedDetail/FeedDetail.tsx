@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import FeedDetailContent from '../../components/FeedDetailContent/FeedDetailContent';
-import { RootState } from '../../module';
-import { getFeedThunk } from '../../module/feedDetail';
-import { timeFormat } from '../../utils/timeFormat';
+import FeedDetailContent from 'components/FeedDetailContent/FeedDetailContent';
+import { RootState } from 'modules';
+import { getFeedThunk } from 'modules/feedDetail';
+import { timeFormat } from 'utils/timeFormat';
 import './FeedDetail.scss';
 
 function FeedDetail() {
