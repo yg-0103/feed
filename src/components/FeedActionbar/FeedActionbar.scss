@@ -4,9 +4,11 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
   ul {
     display: flex;
     margin-bottom: 14px;
+
     li {
       display: flex;
       align-items: center;
@@ -30,14 +32,21 @@
     li.active::before {
       background-color: $color-green;
     }
-  }
 
-  button {
-    width: 48px;
-    height: 24px;
-    background-color: $color-white;
-    font-size: $font-small;
-    color: $color-gray_02;
-    border: 1px solid $color-gray_01;
+    button {
+      background: none;
+      color: inherit;
+      border: none;
+    }
+  }
+  .FeedActionbar-btn-container {
+    button {
+      width: 48px;
+      height: 24px;
+      background-color: $color-white;
+      font-size: $font-small;
+      color: $color-gray_02;
+      border: 1px solid $color-gray_01;
+    }
   }
 }

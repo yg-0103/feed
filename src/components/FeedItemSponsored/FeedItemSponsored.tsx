@@ -5,11 +5,16 @@ import './FeedItemSponsored.scss';
 type FeedItemSponsoredProps = {
   title: string;
   content: string;
+  imagePath: string;
 };
 
-function FeedItemSponsored({ title, content }: FeedItemSponsoredProps) {
+function FeedItemSponsored({
+  title,
+  content,
+  imagePath,
+}: FeedItemSponsoredProps) {
   return (
-    <FeedItem title={title} content={content} sponsored>
+    <FeedItem title={title} content={content} imagePath={imagePath} sponsored>
       <span className="FeedItemSponsored-heading">sponsored</span>
     </FeedItem>
   );

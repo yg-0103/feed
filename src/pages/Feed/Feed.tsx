@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import FeedActionbar from '../../components/FeedActionbar/FeedActionbar';
 import FeedList from '../../container/FeedList/FeedList';
 import Button from '../../components/Button/Button';
@@ -12,12 +12,17 @@ function Feed() {
     (state: RootState) => state.feedState.feeds
   );
 
+  const [sortState, setSortState] = useState('asc');
   const dispatch = useDispatch();
 
+  const handleSetSort = (ord: string) => {
+    setSortState(ord);
+  };
+
   useEffect(() => {
-    dispatch(getFeedsThunk());
+    dispatch(getFeedsThunk(sortState));
     dispatch(getFeedAbsThunk());
-  }, [dispatch]);
+  }, [dispatch, sortState]);
 
   return (
     <div className="Feed-container">
@@ -25,7 +30,7 @@ function Feed() {
         <Button>로그인</Button>
       </div>
       <div className="Feed-FeedList-container">
-        <FeedActionbar />
+        <FeedActionbar handleSetSort={handleSetSort} />
         {loading && <div>로딩중...</div>}
         {error && <div>에러 발생 </div>}
         {feedState && <FeedList feedList={feedState.data} />}

@@ -24,10 +24,10 @@ const getFeedAbsSuccess = (feedAbs: FeedAbsData) => ({
 });
 const getFeedAbsError = (e: Error) => ({ type: GET_FEEDABS_ERROR, payload: e });
 
-export const getFeedsThunk = () => async (dispatch: Dispatch) => {
+export const getFeedsThunk = (ord: string) => async (dispatch: Dispatch) => {
   dispatch(getFeeds());
   try {
-    const feedData = await feedApi.getFeedAll();
+    const feedData = await feedApi.getFeedAll(ord);
     dispatch(getFeedsSuccess(feedData));
   } catch (e) {
     dispatch(getFeedsError(e));

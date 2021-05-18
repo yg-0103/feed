@@ -7,9 +7,16 @@ type FeedItemProps = {
   content: string;
   children: React.ReactNode;
   sponsored?: boolean;
+  imagePath?: string;
 };
 
-function FeedItem({ children, sponsored, title, content }: FeedItemProps) {
+function FeedItem({
+  children,
+  sponsored,
+  title,
+  content,
+  imagePath,
+}: FeedItemProps) {
   return (
     <li className="FeedItem-container">
       <Link to="/">
@@ -21,7 +28,10 @@ function FeedItem({ children, sponsored, title, content }: FeedItemProps) {
         >
           {sponsored ? (
             <div>
-              <img src="https://via.placeholder.com/310x179" alt="img" />
+              <img
+                src={`https://cdn.comento.kr/assignment/${imagePath}`}
+                alt="광고 이미지"
+              />
             </div>
           ) : null}
           <h2>{title}</h2>

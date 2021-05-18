@@ -5,14 +5,22 @@ type FeedItemInfoProps = {
   categoryId: number;
   userId: number;
   createdAt: Date;
+  feedId: number;
 };
 
-function FeedItemInfo({ categoryId, userId, createdAt }: FeedItemInfoProps) {
+const categoryName = ['apple', 'banana', 'coconut'];
+
+function FeedItemInfo({
+  categoryId,
+  userId,
+  createdAt,
+  feedId,
+}: FeedItemInfoProps) {
   return (
     <>
       <div className="FeedItem-header">
-        <span className="category">category_name</span>
-        <span>{categoryId}</span>
+        <span className="category">{categoryName[categoryId - 1]}</span>
+        <span>{feedId}</span>
       </div>
       <div className="FeedItem-info">
         <span className="user-id">{userId}</span>

@@ -24,14 +24,14 @@ function FeedList({ feedList }: FeedListProps) {
             : i % 3 === 0 &&
               feedAbsData && (
                 <FeedItemSponsored
-                  key={i}
                   title={feedAbsData.data[i / 3 - 1].title}
                   content={feedAbsData.data[i / 3 - 1].contents}
+                  imagePath={feedAbsData.data[i / 3 - 1].img}
                 />
               )}
           <FeedItem title={feed.title} content={feed.contents}>
             <FeedItemInfo
-              key={i}
+              feedId={feed.id}
               categoryId={feed.category_id}
               userId={feed.user_id}
               createdAt={feed.created_at}

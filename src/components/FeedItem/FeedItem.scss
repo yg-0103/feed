@@ -25,6 +25,13 @@
     div {
       margin-right: 30px;
       float: left;
+      max-width: 310px;
+
+      img {
+        object-fit: cover;
+        max-height: 179px;
+        width: 100%;
+      }
     }
 
     h2 {
