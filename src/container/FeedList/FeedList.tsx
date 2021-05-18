@@ -5,6 +5,7 @@ import FeedItemInfo from '../../components/FeedItemInfo/FeedItemInfo';
 import FeedItemSponsored from '../../components/FeedItemSponsored/FeedItemSponsored';
 import { RootState } from '../../module';
 import { Feed } from '../../types/feedType';
+import { timeFormat } from '../../utils/timeFormat';
 
 type FeedListProps = {
   feedList: Feed[];
@@ -34,7 +35,7 @@ function FeedList({ feedList }: FeedListProps) {
               feedId={feed.id}
               categoryId={feed.category_id}
               userId={feed.user_id}
-              createdAt={feed.created_at}
+              createdAt={timeFormat(feed.created_at)}
             />
           </FeedItem>
         </React.Fragment>

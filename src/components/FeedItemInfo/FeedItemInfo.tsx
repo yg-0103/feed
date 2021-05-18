@@ -4,7 +4,7 @@ import './FeedItemInfo.scss';
 type FeedItemInfoProps = {
   categoryId: number;
   userId: number;
-  createdAt: Date;
+  createdAt: string;
   feedId: number;
 };
 

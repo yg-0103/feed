@@ -3,7 +3,7 @@ import './FeedDetailContent.scss';
 
 type FeedDetailContentProps = {
   content: string;
-  createAt: Date;
+  createAt: string;
   title?: string;
   userName?: string;
   as?: keyof JSX.IntrinsicElements;

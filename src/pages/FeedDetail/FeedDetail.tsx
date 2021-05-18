@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import FeedDetailContent from '../../components/FeedDetailContent/FeedDetailContent';
 import { RootState } from '../../module';
 import { getFeedThunk } from '../../module/feedDetail';
+import { timeFormat } from '../../utils/timeFormat';
 import './FeedDetail.scss';
 
 function FeedDetail() {
@@ -19,13 +20,15 @@ function FeedDetail() {
 
   return (
     <div className="FeedDetail-container">
+      {loading && <div>로딩 중...</div>}
+      {error && <div>에러 발생!</div>}
       {feedDetailState && (
         <>
           <div>
             <FeedDetailContent
               title={feedDetailState.data.title}
               content={feedDetailState.data.contents}
-              createAt={feedDetailState.data.created_at}
+              createAt={timeFormat(feedDetailState.data.created_at)}
             />
           </div>
           <span>
@@ -38,7 +41,7 @@ function FeedDetail() {
                 userName={comment.user.name}
                 content={comment.contents}
                 as="li"
-                createAt={comment.created_at}
+                createAt={timeFormat(comment.created_at)}
               />
             ))}
           </ul>
