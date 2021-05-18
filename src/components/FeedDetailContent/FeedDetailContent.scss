@@ -1,0 +1,32 @@
+@import '../../styles/variable.scss';
+
+.FeedDetailContent-container {
+  padding: 20px 30px;
+  border: 1px solid $color-gray_01;
+  border-radius: 4px;
+
+  em {
+    display: block;
+    padding-bottom: 10px;
+    color: $color-gray_03;
+    font-style: normal;
+    margin-bottom: 17px;
+    border-bottom: 1px solid $color-gray_01;
+  }
+
+  h2 {
+    font-size: $font-large;
+    margin: 0 0 10px;
+    color: $color-black;
+  }
+
+  p {
+    margin: 0 0 15px;
+    color: $color-gray_04;
+  }
+
+  span {
+    font-size: $font-small;
+    color: $color-gray_02;
+  }
+}

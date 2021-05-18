@@ -1,0 +1,25 @@
+@import '../../styles/variable.scss';
+
+.FeedDetail-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  & > div {
+    margin-bottom: 30px;
+  }
+
+  & > span {
+    color: $color-black;
+
+    span {
+      color: $color-green;
+    }
+  }
+
+  ul {
+    margin-top: 10px;
+
+    li + li {
+      margin-top: 30px;
+    }
+  }
+}
