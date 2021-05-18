@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FeedCategoryData } from '../types/feedCategoryType';
 import { FeedDetailData } from '../types/feedDetailType';
 import { FeedAbsData, FeedData } from '../types/feedType';
 
@@ -26,4 +27,11 @@ export const getFeedAbs = async () => {
   );
 
   return feedAbsData;
+};
+
+export const getFeedCategory = async () => {
+  const { data: feedCategoryData } = await axios.get<FeedCategoryData>(`
+  ${baseUrl}/category`);
+
+  return feedCategoryData;
 };

@@ -4,8 +4,18 @@
   padding: 23px 0;
   border-bottom: 1px solid $color-gray_01;
   margin-bottom: 50px;
-  h2 {
+
+  div {
     max-width: 1140px;
     margin: 0 auto;
+
+    h2 {
+      margin: 0;
+    }
+    button {
+      font-size: $font-xlarge;
+      border: 0;
+      background: $color-white;
+    }
   }
 }
