@@ -5,9 +5,13 @@ import { FeedAbsData, FeedData } from '../types/feedType';
 
 const baseUrl = 'https://problem.comento.kr/api';
 
-export const getFeedAll = async (ord: string, category: string) => {
+export const getFeedAll = async (
+  ord: string,
+  category: string,
+  page: number = 1
+) => {
   const { data: feedData } = await axios.get<FeedData>(
-    `${baseUrl}/list?page=0&ord=${ord}${category}&limit=10`
+    `${baseUrl}/list?page=${page}&ord=${ord}${category}&limit=10`
   );
 
   return feedData;
@@ -21,9 +25,9 @@ export const getFeed = async (id: number) => {
   return feedDetailData;
 };
 
-export const getFeedAbs = async () => {
+export const getFeedAbs = async (page: number = 1) => {
   const { data: feedAbsData } = await axios.get<FeedAbsData>(
-    `${baseUrl}/ads?page=0&limit=10`
+    `${baseUrl}/ads?page=${page}&limit=10`
   );
 
   return feedAbsData;
