@@ -1,0 +1,17 @@
+@import '../../styles/variable.scss';
+
+.ModalCheckbox-container {
+  display: flex;
+  align-items: center;
+
+  input {
+    margin: 0 5px 0 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  label {
+    color: $color-gray_04;
+    vertical-align: middle;
+  }
+}

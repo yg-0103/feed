@@ -4,7 +4,9 @@ export type FeedCategoryState = {
   error: null | Error;
 };
 
-export type FeedCategoryData = Category[];
+export type FeedCategoryData = {
+  category: Category[];
+};
 
 export type Category = {
   id: number;
