@@ -8,34 +8,42 @@ import './FeedDetail.scss';
 
 function FeedDetail() {
   const params = useParams<{ id: string }>();
-  const { data: feedDetailState } = useSelector(
+  const { data: feedDetailState, loading, error } = useSelector(
     (state: RootState) => state.feedDetailState
   );
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFeedThunk(parseInt(params.id, 10)));
-  });
+  }, [dispatch, params]);
+
   return (
     <div className="FeedDetail-container">
-      <div>
-        <FeedDetailContent
-          title="ddd"
-          content="dwdwddw"
-          createAt={new Date().toLocaleDateString()}
-        />
-      </div>
-      <span>
-        답변 <span>2</span>
-      </span>
-      <ul>
-        <FeedDetailContent
-          userName="연구"
-          content="dwdwddw"
-          as="li"
-          createAt={new Date().toLocaleDateString()}
-        />
-      </ul>
+      {feedDetailState && (
+        <>
+          <div>
+            <FeedDetailContent
+              title={feedDetailState.data.title}
+              content={feedDetailState.data.contents}
+              createAt={feedDetailState.data.created_at}
+            />
+          </div>
+          <span>
+            답변 <span>{feedDetailState.data.reply.length}</span>
+          </span>
+          <ul>
+            {feedDetailState.data.reply.map(comment => (
+              <FeedDetailContent
+                key={comment.id}
+                userName={comment.user.name}
+                content={comment.contents}
+                as="li"
+                createAt={comment.created_at}
+              />
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }

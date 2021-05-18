@@ -21,7 +21,7 @@ function FeedItem({
 }: FeedItemProps) {
   return (
     <li className="FeedItem-container">
-      <Link to={`/${id}`}>
+      <Link to={id ? `/${id}` : '#'}>
         {children}
         <div
           className={`FeedItem-content ${

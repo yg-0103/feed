@@ -29,7 +29,7 @@ function FeedList({ feedList }: FeedListProps) {
                   imagePath={feedAbsData.data[i / 3 - 1].img}
                 />
               )}
-          <FeedItem title={feed.title} content={feed.contents}>
+          <FeedItem id={feed.id} title={feed.title} content={feed.contents}>
             <FeedItemInfo
               feedId={feed.id}
               categoryId={feed.category_id}
