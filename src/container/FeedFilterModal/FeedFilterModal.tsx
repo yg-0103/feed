@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ModalCheckbox from 'components/ModalCheckbox/ModalCheckbox';
 import Button from 'components/Button/Button';
 import './FeedFilterModal.scss';

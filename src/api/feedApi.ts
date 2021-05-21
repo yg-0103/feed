@@ -1,9 +1,8 @@
 import axios from 'axios';
+import { baseUrl, limit } from 'constant';
 import { FeedCategoryData } from 'types/feedCategoryType';
 import { FeedDetailData } from 'types/feedDetailType';
 import { FeedAbsData, FeedData } from 'types/feedType';
-
-const baseUrl = 'https://problem.comento.kr/api';
 
 export const getFeedAll = async (
   ord: string,
@@ -11,7 +10,7 @@ export const getFeedAll = async (
   page: number = 1
 ) => {
   const { data: feedData } = await axios.get<FeedData>(
-    `${baseUrl}/list?page=${page}&ord=${ord}${category}&limit=10`
+    `${baseUrl}/list?page=${page}&ord=${ord}${category}&limit=${limit}`
   );
 
   return feedData;
@@ -27,7 +26,7 @@ export const getFeed = async (id: number) => {
 
 export const getFeedAbs = async (page: number = 1) => {
   const { data: feedAbsData } = await axios.get<FeedAbsData>(
-    `${baseUrl}/ads?page=${page}&limit=10`
+    `${baseUrl}/ads?page=${page}&limit=${limit}`
   );
 
   return feedAbsData;

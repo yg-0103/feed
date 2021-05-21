@@ -36,8 +36,8 @@ function FeedItem({
               />
             </div>
           ) : null}
-          <h2>{title}</h2>
-          <p>{content}</p>
+          <h2 title={title}>{title}</h2>
+          <p title={content}>{content}</p>
         </div>
       </Link>
     </li>

@@ -1,3 +1,5 @@
+@import 'styles/variable.scss';
+
 .Feed-container {
   display: flex;
   max-width: 1140px;
@@ -5,18 +7,19 @@
   padding-bottom: 30px;
 
   .Feed-btn-container {
-    width: 25%;
+    width: 23%;
     margin-right: 40px;
+
     button {
       width: 100%;
     }
   }
 
   .Feed-FeedList-container {
-    width: 75%;
+    width: 72%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     .Feed-btn-container {
       display: none;
     }

@@ -52,7 +52,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     .FeedFilterModal-dialog {
       box-sizing: border-box;
       width: 337px;

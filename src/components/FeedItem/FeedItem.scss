@@ -29,7 +29,6 @@
       max-width: 310px;
 
       img {
-        object-fit: cover;
         max-height: 179px;
         width: 100%;
       }
@@ -55,7 +54,7 @@
     margin-top: 20px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     border: none;
     border-radius: 0;
     padding: 20px 15px;

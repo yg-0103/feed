@@ -6,10 +6,12 @@ import { RootState } from 'modules';
 import { getFeedThunk } from 'modules/feedDetail';
 import { timeFormat } from 'utils/timeFormat';
 import './FeedDetail.scss';
+import SkeletonItem from 'components/SkeletonItem/SkeletonItem';
+import { limit } from 'constant';
 
 function FeedDetail() {
   const params = useParams<{ id: string }>();
-  const { data: feedDetailState, loading, error } = useSelector(
+  const { data: feedDetailState, loading } = useSelector(
     (state: RootState) => state.feedDetailState
   );
 
@@ -20,8 +22,6 @@ function FeedDetail() {
 
   return (
     <div className="FeedDetail-container">
-      {loading && <div>로딩 중...</div>}
-      {error && <div>에러 발생!</div>}
       {feedDetailState && (
         <>
           <div>
@@ -48,6 +48,10 @@ function FeedDetail() {
           </ul>
         </>
       )}
+      {loading &&
+        Array.from({ length: limit }, (_, i) => (
+          <SkeletonItem key={`skeleton_${i}`} />
+        ))}
     </div>
   );
 }

@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
+
   ul {
     padding-top: 3px;
     display: flex;
@@ -51,7 +52,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     box-sizing: border-box;
     border-bottom: 1px solid $color-gray_01;
     padding: 0 15px;

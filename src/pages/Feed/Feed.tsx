@@ -12,9 +12,10 @@ import {
 } from 'modules/feed';
 import { debounce } from 'utils/debounce';
 import SkeletonItem from 'components/SkeletonItem/SkeletonItem';
+import { limit } from 'constant';
 
 function Feed() {
-  const { data: feedState, loading, error } = useSelector(
+  const { data: feedState, loading } = useSelector(
     (state: RootState) => state.feedState.feeds
   );
   const [sortState, setSortState] = useState('asc');
@@ -38,19 +39,20 @@ function Feed() {
   };
 
   const handleScroll = useCallback(() => {
-    if (pageRef.current > 9) return;
+    if (!feedState) return;
+    if (pageRef.current >= feedState.last_page) return;
+
     const {
       scrollHeight,
       clientHeight,
       scrollTop,
     } = document.scrollingElement as Element;
-    console.log(scrollTop);
     if (scrollTop + clientHeight >= scrollHeight) {
       dispatch(
         loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
       );
     }
-  }, [dispatch, feedCategory, sortState]);
+  }, [dispatch, feedCategory, sortState, feedState]);
 
   useEffect(() => {
     dispatch(getFeedsThunk(sortState, feedCategory.join('')));
@@ -60,7 +62,6 @@ function Feed() {
 
   useEffect(() => {
     document.onscroll = debounce(handleScroll, 300);
-
     return () => {
       document.onscroll = null;
     };
@@ -77,9 +78,8 @@ function Feed() {
           handleChangeCategory={handleChangeCategory}
         />
         {feedState && <FeedList feedList={feedState.data} />}
-        {error && <div>에러 발생 </div>}
         {loading &&
-          Array.from({ length: 10 }, (_, i) => (
+          Array.from({ length: limit }, (_, i) => (
             <SkeletonItem key={`skeleton_${i}`} />
           ))}
       </div>

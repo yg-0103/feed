@@ -1,7 +1,7 @@
 @import 'styles/variable.scss';
 
 .FeedList-container {
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     background-color: $color-gray_01;
   }
 }

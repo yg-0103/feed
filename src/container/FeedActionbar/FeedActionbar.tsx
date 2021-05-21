@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'components/Button/Button';
 import FeedFilterModal from 'container/FeedFilterModal/FeedFilterModal';
 import './FeedActionbar.scss';
@@ -27,6 +27,10 @@ function FeedActionbar({
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'visible';
+  });
 
   return (
     <>

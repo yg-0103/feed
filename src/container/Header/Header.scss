@@ -15,11 +15,12 @@
     button {
       font-size: $font-xlarge;
       border: 0;
+      font-weight: 900;
       background: $color-white;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     margin-bottom: 15px;
     padding: 15px;
 

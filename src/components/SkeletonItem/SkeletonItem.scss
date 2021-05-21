@@ -7,7 +7,6 @@
   border-radius: 4px;
   background-color: $color-white;
   height: 149px;
-  width: 793px;
 
   .SkeletonItem-category {
     display: flex;
@@ -17,7 +16,7 @@
 
     div {
       width: 50px;
-      height: 20px;
+      height: 15px;
       background-color: $color-gray_01;
     }
 
@@ -32,7 +31,7 @@
       div {
         background-color: $color-gray_01;
         width: 30px;
-        height: 20px;
+        height: 15px;
       }
 
       div + div {
@@ -51,10 +50,9 @@
     margin-top: 20px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $device-mobile) {
     border: none;
     border-radius: 0;
     padding: 20px 15px;
-    width: auto;
   }
 }
