@@ -5,6 +5,7 @@
   padding: 20px 30px;
   border: 1px solid $color-gray_01;
   border-radius: 4px;
+  background-color: $color-white;
 
   .FeedItem-content {
     h2 {
@@ -52,5 +53,26 @@
 
   & + & {
     margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    border: none;
+    border-radius: 0;
+    padding: 20px 15px;
+
+    .FeedItem-sponsored {
+      div {
+        float: none;
+        margin: 0;
+        max-width: 100%;
+      }
+
+      p {
+        @include webkitMultilineEllipsis(2);
+      }
+    }
+    & + & {
+      margin-top: 10px;
+    }
   }
 }

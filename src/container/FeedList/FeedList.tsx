@@ -6,6 +6,7 @@ import FeedItemSponsored from 'components/FeedItemSponsored/FeedItemSponsored';
 import { RootState } from 'modules';
 import { Feed } from 'types/feedType';
 import { timeFormat } from 'utils/timeFormat';
+import './FeedList.scss';
 
 type FeedListProps = {
   feedList: Feed[];
@@ -17,7 +18,7 @@ function FeedList({ feedList }: FeedListProps) {
   );
 
   return (
-    <ul>
+    <ul className="FeedList-container">
       {feedList.map((feed, i) => (
         <React.Fragment key={feed.id}>
           {i === 0

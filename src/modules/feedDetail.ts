@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { FeedDetailData, FeedDetailState } from 'types/feedDetailType';
 import * as feedApi from 'api/feedApi';
+import { asyncState } from 'utils/reducerUtils';
 
 const GET_FEED = 'feedDetail/GET_FEED' as const;
 const GET_FEED_SUCCESS = 'feedDetail/GET_FEED_SUCCESS' as const;
@@ -28,35 +29,19 @@ type FeedDetailAction =
   | ReturnType<typeof getFeedSuccess>
   | ReturnType<typeof getFeedError>;
 
-const initialState: FeedDetailState = {
-  loading: false,
-  data: null,
-  error: null,
-};
+const initialState: FeedDetailState = asyncState.initial();
 
 const feedDetailReducer = (
   state: FeedDetailState = initialState,
   action: FeedDetailAction
-) => {
+): FeedDetailState => {
   switch (action.type) {
     case GET_FEED:
-      return {
-        loading: true,
-        data: null,
-        error: null,
-      };
+      return asyncState.load();
     case GET_FEED_SUCCESS:
-      return {
-        loading: false,
-        data: action.payload,
-        error: null,
-      };
+      return asyncState.success(action.payload);
     case GET_FEED_ERROR:
-      return {
-        loading: false,
-        data: null,
-        error: action.payload,
-      };
+      return asyncState.error(action.payload);
     default:
       return state;
   }

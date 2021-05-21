@@ -30,16 +30,24 @@ function FeedFilterModal({
     setCategory([...newCategory]);
   };
 
+  const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+
+    if (!target.matches('.FeedFilterModal-container')) return;
+    onClick();
+  };
+
   const handleSave = () => {
     handleChangeCategory(category);
     onClick();
   };
+
   useEffect(() => {
     dispatch(getFeedCategoryThunk());
   }, [dispatch]);
 
   return (
-    <div className="FeedFilterModal-container">
+    <div className="FeedFilterModal-container" onClick={handleClose}>
       <div className="FeedFilterModal-dialog">
         <h2>필터</h2>
         <ul>
@@ -69,3 +77,4 @@ function FeedFilterModal({
 }
 
 export default FeedFilterModal;
+ 

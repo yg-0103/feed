@@ -27,6 +27,7 @@ function FeedDetail() {
           <div>
             <FeedDetailContent
               title={feedDetailState.data.title}
+              className="main-content"
               content={feedDetailState.data.contents}
               createAt={timeFormat(feedDetailState.data.created_at)}
             />

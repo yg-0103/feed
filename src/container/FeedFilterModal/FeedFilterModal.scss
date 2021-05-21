@@ -51,4 +51,23 @@
       font-size: $font-xlarge;
     }
   }
+
+  @media (max-width: 768px) {
+    .FeedFilterModal-dialog {
+      box-sizing: border-box;
+      width: 337px;
+      height: 268px;
+      padding: 30px;
+
+      & > div {
+        align-self: initial;
+        margin-top: 20px;
+      }
+
+      .FeedFilterModal-btn-save {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
 }

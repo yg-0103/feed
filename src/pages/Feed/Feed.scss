@@ -5,11 +5,25 @@
   padding-bottom: 30px;
 
   .Feed-btn-container {
-    max-width: 265px;
+    width: 25%;
     margin-right: 40px;
+    button {
+      width: 100%;
+    }
   }
 
   .Feed-FeedList-container {
-    max-width: 865px;
+    width: 75%;
+  }
+
+  @media (max-width: 768px) {
+    .Feed-btn-container {
+      display: none;
+    }
+
+    .Feed-FeedList-container {
+      box-sizing: border-box;
+      width: 100%;
+    }
   }
 }

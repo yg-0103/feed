@@ -24,7 +24,6 @@ function Feed() {
   ]);
 
   const pageRef = useRef(1);
-  console.log(pageRef.current);
   const dispatch = useDispatch();
 
   const handleSort = (ord: string) => {
@@ -43,7 +42,7 @@ function Feed() {
       scrollTop,
     } = document.scrollingElement as Element;
 
-    if (scrollTop + clientHeight >= scrollHeight * 0.9) {
+    if (scrollTop + clientHeight >= scrollHeight) {
       dispatch(
         loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
       );
@@ -57,7 +56,7 @@ function Feed() {
   }, [dispatch, sortState, feedCategory]);
 
   useEffect(() => {
-    document.onscroll = debounce(handleScroll, 300);
+    document.onscroll = debounce(handleScroll, 200);
 
     return () => {
       document.onscroll = null;

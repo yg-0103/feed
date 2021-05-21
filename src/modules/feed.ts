@@ -7,6 +7,7 @@ import {
   FeedState,
 } from 'types/feedType';
 import * as feedApi from 'api/feedApi';
+import { asyncState } from 'utils/reducerUtils';
 
 const GET_FEEDS = 'feed/GET_FEEDS' as const;
 const GET_FEEDS_SUCCESS = 'feed/GET_FEEDS_SUCCESS' as const;
@@ -95,80 +96,61 @@ type FeedAction =
   | ReturnType<typeof loadMoreFeedError>;
 
 const initialState: FeedState = {
-  feeds: {
-    loading: false,
-    data: null,
-    error: null,
-  },
-  feedAbs: {
-    loading: false,
-    data: null,
-    error: null,
-  },
+  feeds: asyncState.initial(),
+  feedAbs: asyncState.initial(),
 };
 
-const feedReducer = (state: FeedState = initialState, action: FeedAction) => {
+const feedReducer = (
+  state: FeedState = initialState,
+  action: FeedAction
+): FeedState => {
   switch (action.type) {
     case GET_FEEDS:
       return {
         ...state,
-        feeds: {
-          loading: true,
-          data: null,
-          error: null,
-        },
+        feeds: asyncState.load(),
       };
     case GET_FEEDS_SUCCESS:
       return {
         ...state,
-        feeds: {
-          loading: false,
-          data: action.payload,
-          error: null,
-        },
+        feeds: asyncState.success(action.payload),
       };
     case GET_FEEDS_ERROR:
       return {
         ...state,
-        feeds: {
-          loading: false,
-          data: null,
-          error: action.payload,
-        },
+        feeds: asyncState.error(action.payload),
       };
     case GET_FEEDABS:
       return {
         ...state,
-        feedAbs: {
-          loading: true,
-          data: null,
-          error: null,
-        },
+        feedAbs: asyncState.load(),
       };
     case GET_FEEDABS_SUCCESS:
       return {
         ...state,
-        feedAbs: {
-          loading: false,
-          data: action.payload,
-          error: null,
-        },
+        feedAbs: asyncState.success(action.payload),
       };
     case GET_FEEDABS_ERROR:
       return {
         ...state,
-        feedAbs: {
-          loading: false,
-          data: null,
-          error: action.payload,
-        },
+        feedAbs: asyncState.error(action.payload),
       };
     case LOAD_MORE_FEED:
-      return state;
+      return {
+        feeds: {
+          ...state.feeds,
+          loading: true,
+        },
+        feedAbs: {
+          ...state.feedAbs,
+          loading: true,
+        },
+      };
     case LOAD_MORE_FEED_SUCCESS:
       return {
         feeds: {
           ...state.feeds,
+          loading: false,
           data: {
             ...(state.feeds.data as FeedData),
             data: [
@@ -179,6 +161,7 @@ const feedReducer = (state: FeedState = initialState, action: FeedAction) => {
         },
         feedAbs: {
           ...state.feedAbs,
+          loading: false,
           data: {
             ...(state.feedAbs.data as FeedAbsData),
             data: [
@@ -189,7 +172,18 @@ const feedReducer = (state: FeedState = initialState, action: FeedAction) => {
         },
       };
     case LOAD_MORE_FEED_ERROR:
-      return state;
+      return {
+        feeds: {
+          ...state.feeds,
+          loading: false,
+          error: action.payload,
+        },
+        feedAbs: {
+          ...state.feedAbs,
+          loading: false,
+          error: action.payload,
+        },
+      };
     default:
       return state;
   }
