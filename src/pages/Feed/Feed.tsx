@@ -11,6 +11,7 @@ import {
   loadMoreFeedThunk,
 } from 'modules/feed';
 import { debounce } from 'utils/debounce';
+import SkeletonItem from 'components/SkeletonItem/SkeletonItem';
 
 function Feed() {
   const { data: feedState, loading, error } = useSelector(
@@ -35,13 +36,13 @@ function Feed() {
   };
 
   const handleScroll = useCallback(() => {
-    if (pageRef.current > 10) return;
+    if (pageRef.current > 9) return;
     const {
       scrollHeight,
       clientHeight,
       scrollTop,
     } = document.scrollingElement as Element;
-
+    console.log(scrollTop);
     if (scrollTop + clientHeight >= scrollHeight) {
       dispatch(
         loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
@@ -56,7 +57,7 @@ function Feed() {
   }, [dispatch, sortState, feedCategory]);
 
   useEffect(() => {
-    document.onscroll = debounce(handleScroll, 200);
+    document.onscroll = debounce(handleScroll, 300);
 
     return () => {
       document.onscroll = null;
@@ -73,9 +74,12 @@ function Feed() {
           handleSort={handleSort}
           handleChangeCategory={handleChangeCategory}
         />
-        {loading && <div>로딩중...</div>}
-        {error && <div>에러 발생 </div>}
         {feedState && <FeedList feedList={feedState.data} />}
+        {error && <div>에러 발생 </div>}
+        {loading &&
+          Array.from({ length: 10 }, (_, i) => (
+            <SkeletonItem key={`skeleton_${i}`} />
+          ))}
       </div>
     </div>
   );
