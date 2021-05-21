@@ -19,16 +19,7 @@ function FeedFilterModal({
     (state: RootState) => state.feedCategoryState
   );
 
-  const [category, setCategory] = useState<string[]>([]);
-
   const dispatch = useDispatch();
-
-  const handleSetCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const newCategory = new Set([...category, `${name}=${value}`]);
-
-    setCategory([...newCategory]);
-  };
 
   const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -38,6 +29,19 @@ function FeedFilterModal({
   };
 
   const handleSave = () => {
+    const $checkbox = document.querySelectorAll(
+      '.ModalCheckbox-container input'
+    );
+
+    const category = [...$checkbox]
+      .filter($input => ($input as HTMLInputElement).checked)
+      .map(
+        $input =>
+          `${($input as HTMLInputElement).name}=${
+            ($input as HTMLInputElement).value
+          }`
+      );
+
     handleChangeCategory(category);
     onClick();
   };
@@ -57,7 +61,6 @@ function FeedFilterModal({
                 <ModalCheckbox
                   id={category.id}
                   categoryName={category.name}
-                  handleSetCategory={handleSetCategory}
                   name="&category[]"
                 />
               </li>
@@ -77,4 +80,3 @@ function FeedFilterModal({
 }
 
 export default FeedFilterModal;
- 

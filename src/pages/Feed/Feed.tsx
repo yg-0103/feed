@@ -32,7 +32,9 @@ function Feed() {
   };
 
   const handleChangeCategory = (category: string[]) => {
-    setFeedCategory(category);
+    setFeedCategory(prevCategory =>
+      category.length ? category : prevCategory
+    );
   };
 
   const handleScroll = useCallback(() => {
