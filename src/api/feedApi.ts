@@ -2,7 +2,7 @@ import axios from 'axios';
 import { baseUrl, limit } from 'constant';
 import { FeedCategoryData } from 'types/feedCategoryType';
 import { FeedDetailData } from 'types/feedDetailType';
-import { FeedAbsData, FeedData } from 'types/feedType';
+import { FeedAdsData, FeedData } from 'types/feedType';
 
 export const getFeedAll = async (
   ord: string,
@@ -24,12 +24,12 @@ export const getFeed = async (id: number) => {
   return feedDetailData;
 };
 
-export const getFeedAbs = async (page: number = 1) => {
-  const { data: feedAbsData } = await axios.get<FeedAbsData>(
+export const getFeedAds = async (page: number = 1) => {
+  const { data: feedAdsData } = await axios.get<FeedAdsData>(
     `${baseUrl}/ads?page=${page}&limit=${limit}`
   );
 
-  return feedAbsData;
+  return feedAdsData;
 };
 
 export const getFeedCategory = async () => {

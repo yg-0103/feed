@@ -24,9 +24,9 @@ export type Feed = {
   updated_at: Date;
 };
 
-export type FeedAbsData = {
+export type FeedAdsData = {
   current_page: number;
-  data: FeedAbs[];
+  data: FeedAds[];
   first_page_url: string;
   from: number;
   last_page: number;
@@ -40,7 +40,7 @@ export type FeedAbsData = {
   total: number;
 };
 
-export type FeedAbs = {
+export type FeedAds = {
   id: number;
   title: string;
   contents: string;
@@ -55,9 +55,9 @@ export type FeedState = {
     data: null | FeedData;
     error: null | Error;
   };
-  feedAbs: {
+  feedAds: {
     loading: boolean;
-    data: null | FeedAbsData;
+    data: null | FeedAdsData;
     error: null | Error;
   };
 };

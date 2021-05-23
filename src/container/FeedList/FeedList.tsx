@@ -13,8 +13,8 @@ type FeedListProps = {
 };
 
 function FeedList({ feedList }: FeedListProps) {
-  const { data: feedAbsData } = useSelector(
-    (state: RootState) => state.feedState.feedAbs
+  const { data: feedAdsData } = useSelector(
+    (state: RootState) => state.feedState.feedAds
   );
 
   return (
@@ -24,11 +24,11 @@ function FeedList({ feedList }: FeedListProps) {
           {i === 0
             ? null
             : i % 3 === 0 &&
-              feedAbsData && (
+              feedAdsData && (
                 <FeedItemSponsored
-                  title={feedAbsData.data[i / 3 - 1].title}
-                  content={feedAbsData.data[i / 3 - 1].contents}
-                  imagePath={feedAbsData.data[i / 3 - 1].img}
+                  title={feedAdsData.data[i / 3 - 1].title}
+                  content={feedAdsData.data[i / 3 - 1].contents}
+                  imagePath={feedAdsData.data[i / 3 - 1].img}
                 />
               )}
           <FeedItem id={feed.id} title={feed.title} content={feed.contents}>

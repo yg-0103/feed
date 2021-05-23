@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import {
   Feed,
-  FeedAbs,
-  FeedAbsData,
+  FeedAds,
+  FeedAdsData,
   FeedData,
   FeedState,
 } from 'types/feedType';
@@ -13,9 +13,9 @@ const GET_FEEDS = 'feed/GET_FEEDS' as const;
 const GET_FEEDS_SUCCESS = 'feed/GET_FEEDS_SUCCESS' as const;
 const GET_FEEDS_ERROR = 'feed/GET_FEEDS_ERROR' as const;
 
-const GET_FEEDABS = 'feed/GET_FEEDABS' as const;
-const GET_FEEDABS_SUCCESS = 'feed/GET_FEEDABS_SUCCESS' as const;
-const GET_FEEDABS_ERROR = 'feed/GET_FEEDABS_ERROR' as const;
+const GET_FEEDADS = 'feed/GET_FEEDADS' as const;
+const GET_FEEDADS_SUCCESS = 'feed/GET_FEEDADS_SUCCESS' as const;
+const GET_FEEDADS_ERROR = 'feed/GET_FEEDADS_ERROR' as const;
 
 const LOAD_MORE_FEED = 'feed/LOAD_MORE_FEED' as const;
 const LOAD_MORE_FEED_SUCCESS = 'feed/LOAD_MORE_FEED_SUCCESS' as const;
@@ -28,15 +28,15 @@ const getFeedsSuccess = (feeds: FeedData) => ({
 });
 const getFeedsError = (e: Error) => ({ type: GET_FEEDS_ERROR, payload: e });
 
-const getFeedAbs = () => ({ type: GET_FEEDABS });
-const getFeedAbsSuccess = (feedAbs: FeedAbsData) => ({
-  type: GET_FEEDABS_SUCCESS,
-  payload: feedAbs,
+const getFeedAds = () => ({ type: GET_FEEDADS });
+const getFeedAdsSuccess = (feedAds: FeedAdsData) => ({
+  type: GET_FEEDADS_SUCCESS,
+  payload: feedAds,
 });
-const getFeedAbsError = (e: Error) => ({ type: GET_FEEDABS_ERROR, payload: e });
+const getFeedAdsError = (e: Error) => ({ type: GET_FEEDADS_ERROR, payload: e });
 
 const loadMoreFeed = () => ({ type: LOAD_MORE_FEED });
-const loadMoreFeedSuccess = (nextData: { feeds: Feed[]; abs: FeedAbs[] }) => ({
+const loadMoreFeedSuccess = (nextData: { feeds: Feed[]; ads: FeedAds[] }) => ({
   type: LOAD_MORE_FEED_SUCCESS,
   payload: nextData,
 });
@@ -57,13 +57,13 @@ export const getFeedsThunk = (ord: string, category: any) => async (
   }
 };
 
-export const getFeedAbsThunk = () => async (dispatch: Dispatch) => {
-  dispatch(getFeedAbs());
+export const getFeedAdsThunk = () => async (dispatch: Dispatch) => {
+  dispatch(getFeedAds());
   try {
-    const feedAbsData = await feedApi.getFeedAbs();
-    dispatch(getFeedAbsSuccess(feedAbsData));
+    const feedAdsData = await feedApi.getFeedAds();
+    dispatch(getFeedAdsSuccess(feedAdsData));
   } catch (e) {
-    dispatch(getFeedAbsError(e));
+    dispatch(getFeedAdsError(e));
   }
 };
 
@@ -75,9 +75,9 @@ export const loadMoreFeedThunk = (
   dispatch(loadMoreFeed());
   try {
     const nextFeedsData = await feedApi.getFeedAll(ord, category, page);
-    const nextAbsData = await feedApi.getFeedAbs(page);
+    const nextAdsData = await feedApi.getFeedAds(page);
     dispatch(
-      loadMoreFeedSuccess({ feeds: nextFeedsData.data, abs: nextAbsData.data })
+      loadMoreFeedSuccess({ feeds: nextFeedsData.data, ads: nextAdsData.data })
     );
   } catch (e) {
     dispatch(loadMoreFeedError(e));
@@ -88,16 +88,16 @@ type FeedAction =
   | ReturnType<typeof getFeeds>
   | ReturnType<typeof getFeedsSuccess>
   | ReturnType<typeof getFeedsError>
-  | ReturnType<typeof getFeedAbs>
-  | ReturnType<typeof getFeedAbsSuccess>
-  | ReturnType<typeof getFeedAbsError>
+  | ReturnType<typeof getFeedAds>
+  | ReturnType<typeof getFeedAdsSuccess>
+  | ReturnType<typeof getFeedAdsError>
   | ReturnType<typeof loadMoreFeed>
   | ReturnType<typeof loadMoreFeedSuccess>
   | ReturnType<typeof loadMoreFeedError>;
 
 const initialState: FeedState = {
   feeds: asyncState.initial(),
-  feedAbs: asyncState.initial(),
+  feedAds: asyncState.initial(),
 };
 
 const feedReducer = (
@@ -120,20 +120,20 @@ const feedReducer = (
         ...state,
         feeds: asyncState.error(action.payload),
       };
-    case GET_FEEDABS:
+    case GET_FEEDADS:
       return {
         ...state,
-        feedAbs: asyncState.load(),
+        feedAds: asyncState.load(),
       };
-    case GET_FEEDABS_SUCCESS:
+    case GET_FEEDADS_SUCCESS:
       return {
         ...state,
-        feedAbs: asyncState.success(action.payload),
+        feedAds: asyncState.success(action.payload),
       };
-    case GET_FEEDABS_ERROR:
+    case GET_FEEDADS_ERROR:
       return {
         ...state,
-        feedAbs: asyncState.error(action.payload),
+        feedAds: asyncState.error(action.payload),
       };
     case LOAD_MORE_FEED:
       return {
@@ -141,8 +141,8 @@ const feedReducer = (
           ...state.feeds,
           loading: true,
         },
-        feedAbs: {
-          ...state.feedAbs,
+        feedAds: {
+          ...state.feedAds,
           loading: true,
         },
       };
@@ -159,14 +159,14 @@ const feedReducer = (
             ],
           },
         },
-        feedAbs: {
-          ...state.feedAbs,
+        feedAds: {
+          ...state.feedAds,
           loading: false,
           data: {
-            ...(state.feedAbs.data as FeedAbsData),
+            ...(state.feedAds.data as FeedAdsData),
             data: [
-              ...(state.feedAbs.data as FeedAbsData).data,
-              ...action.payload.abs,
+              ...(state.feedAds.data as FeedAdsData).data,
+              ...action.payload.ads,
             ],
           },
         },
@@ -178,8 +178,8 @@ const feedReducer = (
           loading: false,
           error: action.payload,
         },
-        feedAbs: {
-          ...state.feedAbs,
+        feedAds: {
+          ...state.feedAds,
           loading: false,
           error: action.payload,
         },

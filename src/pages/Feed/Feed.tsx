@@ -6,7 +6,7 @@ import './Feed.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'modules';
 import {
-  getFeedAbsThunk,
+  getFeedAdsThunk,
   getFeedsThunk,
   loadMoreFeedThunk,
 } from 'modules/feed';
@@ -16,6 +16,7 @@ import { limit } from 'constant';
 import { useLocalstorage } from 'hooks/useLocalstorage';
 import { getFeedCategoryThunk } from 'modules/feedCategory';
 import { asyncInfinityScroll } from 'utils/asyncInfinityScroll';
+import { getCategoryId } from 'utils/getCategoryId';
 
 function Feed() {
   const { data: feedState, loading } = useSelector(
@@ -62,7 +63,7 @@ function Feed() {
   }, [dispatch, sortState, feedCategory]);
 
   useEffect(() => {
-    dispatch(getFeedAbsThunk());
+    dispatch(getFeedAdsThunk());
     dispatch(getFeedCategoryThunk());
   }, [dispatch]);
 
@@ -87,11 +88,7 @@ function Feed() {
           {feedCategoryState &&
             feedCategory.map(categoryId => (
               <span key={categoryId}>
-                {
-                  feedCategoryState.category[
-                    +categoryId[categoryId.length - 1] - 1
-                  ].name
-                }
+                {feedCategoryState.category[getCategoryId(categoryId) - 1].name}
               </span>
             ))}
         </div>
