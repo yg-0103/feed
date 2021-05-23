@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'components/Button/Button';
 import FeedFilterModal from 'container/FeedFilterModal/FeedFilterModal';
 import './FeedActionbar.scss';
+import { useLocalstorage } from 'hooks/useLocalstorage';
 
 type FeedActionbarProps = {
   handleSort: (ord: string) => void;
@@ -12,16 +13,12 @@ function FeedActionbar({
   handleSort,
   handleChangeCategory,
 }: FeedActionbarProps) {
-  const [active, setActive] = useState({
-    asc: true,
-    desc: false,
-  });
-
+  const [sortState, setSortState] = useLocalstorage('sort', 'asc');
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleActive = (activeState: typeof active, ord: string) => {
+  const handleActive = (ord: string) => {
     handleSort(ord);
-    setActive(activeState);
+    setSortState(ord);
   };
 
   const handleOpen = () => {
@@ -36,19 +33,11 @@ function FeedActionbar({
     <>
       <div className="FeedActionbar-container">
         <ul>
-          <li className={active.asc ? 'active' : ''}>
-            <button
-              onClick={() => handleActive({ asc: true, desc: false }, 'asc')}
-            >
-              오름차순
-            </button>
+          <li className={sortState === 'asc' ? 'active' : ''}>
+            <button onClick={() => handleActive('asc')}>오름차순</button>
           </li>
-          <li className={active.desc ? 'active' : ''}>
-            <button
-              onClick={() => handleActive({ asc: false, desc: true }, 'desc')}
-            >
-              내림차순
-            </button>
+          <li className={sortState === 'desc' ? 'active' : ''}>
+            <button onClick={() => handleActive('desc')}>내림차순</button>
           </li>
         </ul>
         <div className="FeedActionbar-btn-container">

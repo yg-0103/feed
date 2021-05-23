@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import FeedActionbar from 'container/FeedActionbar/FeedActionbar';
 import FeedList from 'container/FeedList/FeedList';
 import Button from 'components/Button/Button';
@@ -13,13 +13,20 @@ import {
 import { debounce } from 'utils/debounce';
 import SkeletonItem from 'components/SkeletonItem/SkeletonItem';
 import { limit } from 'constant';
+import { useLocalstorage } from 'hooks/useLocalstorage';
+import { getFeedCategoryThunk } from 'modules/feedCategory';
+import { asyncInfinityScroll } from 'utils/asyncInfinityScroll';
 
 function Feed() {
   const { data: feedState, loading } = useSelector(
     (state: RootState) => state.feedState.feeds
   );
-  const [sortState, setSortState] = useState('asc');
-  const [feedCategory, setFeedCategory] = useState([
+
+  const { data: feedCategoryState } = useSelector(
+    (state: RootState) => state.feedCategoryState
+  );
+  const [sortState, setSortState] = useLocalstorage('sort', 'asc');
+  const [feedCategory, setFeedCategory] = useLocalstorage('category', [
     '&category[]=1',
     '&category[]=2',
     '&category[]=3',
@@ -42,23 +49,22 @@ function Feed() {
     if (!feedState) return;
     if (pageRef.current >= feedState.last_page) return;
 
-    const {
-      scrollHeight,
-      clientHeight,
-      scrollTop,
-    } = document.scrollingElement as Element;
-    if (scrollTop + clientHeight >= scrollHeight) {
-      dispatch(
-        loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
-      );
-    }
+    asyncInfinityScroll(
+      dispatch,
+      loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
+    );
   }, [dispatch, feedCategory, sortState, feedState]);
 
   useEffect(() => {
     dispatch(getFeedsThunk(sortState, feedCategory.join('')));
-    dispatch(getFeedAbsThunk());
+
     pageRef.current = 1;
   }, [dispatch, sortState, feedCategory]);
+
+  useEffect(() => {
+    dispatch(getFeedAbsThunk());
+    dispatch(getFeedCategoryThunk());
+  }, [dispatch]);
 
   useEffect(() => {
     document.onscroll = debounce(handleScroll, 300);
@@ -77,6 +83,18 @@ function Feed() {
           handleSort={handleSort}
           handleChangeCategory={handleChangeCategory}
         />
+        <div className="Feed-FeedCategory-container">
+          {feedCategoryState &&
+            feedCategory.map(categoryId => (
+              <span key={categoryId}>
+                {
+                  feedCategoryState.category[
+                    +categoryId[categoryId.length - 1] - 1
+                  ].name
+                }
+              </span>
+            ))}
+        </div>
         {feedState && <FeedList feedList={feedState.data} />}
         {loading &&
           Array.from({ length: limit }, (_, i) => (

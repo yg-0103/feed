@@ -18,3 +18,7 @@ li {
 button {
   cursor: pointer;
 }
+
+* {
+  user-select: none;
+}

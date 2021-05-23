@@ -20,7 +20,7 @@ function FeedItemInfo({
     <>
       <div className="FeedItem-header">
         <span className="category">{categoryName[categoryId - 1]}</span>
-        <span>{feedId}</span>
+        <span title="feed id">{feedId}</span>
       </div>
       <div className="FeedItem-info">
         <span className="user-id">{userId}</span>

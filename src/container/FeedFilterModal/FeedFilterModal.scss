@@ -44,11 +44,12 @@
 
     .FeedFilterModal-btn-close {
       position: absolute;
+      color: $color-gray_03;
       top: 10px;
       right: 10px;
       background-color: transparent;
       border: none;
-      font-size: $font-xlarge;
+      font-size: $font-large;
     }
   }
 

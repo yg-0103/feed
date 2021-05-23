@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ModalCheckbox from 'components/ModalCheckbox/ModalCheckbox';
 import Button from 'components/Button/Button';
 import './FeedFilterModal.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from 'modules';
-import { getFeedCategoryThunk } from 'modules/feedCategory';
 
 type FeedFilterModalProps = {
   onClick: () => void;
@@ -18,8 +17,6 @@ function FeedFilterModal({
   const { data: feedCategoryState } = useSelector(
     (state: RootState) => state.feedCategoryState
   );
-
-  const dispatch = useDispatch();
 
   const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -46,10 +43,6 @@ function FeedFilterModal({
     onClick();
   };
 
-  useEffect(() => {
-    dispatch(getFeedCategoryThunk());
-  }, [dispatch]);
-
   return (
     <div className="FeedFilterModal-container" onClick={handleClose}>
       <div className="FeedFilterModal-dialog">
@@ -71,7 +64,7 @@ function FeedFilterModal({
             저장하기
           </Button>
           <button className="FeedFilterModal-btn-close" onClick={onClick}>
-            x
+            ✕
           </button>
         </div>
       </div>

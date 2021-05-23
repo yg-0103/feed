@@ -19,6 +19,23 @@
     width: 72%;
   }
 
+  .Feed-FeedCategory-container {
+    margin-bottom: 15px;
+
+    span {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 1px solid $color-gray_01;
+      border-radius: 5px;
+      color: $color-gray_03;
+      font-size: $font-small;
+    }
+
+    span + span {
+      margin-left: 10px;
+    }
+  }
+
   @media (max-width: $device-mobile) {
     .Feed-btn-container {
       display: none;
@@ -27,6 +44,13 @@
     .Feed-FeedList-container {
       box-sizing: border-box;
       width: 100%;
+    }
+    .Feed-FeedCategory-container {
+      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+      padding: 10px 15px;
+      border-bottom: 1px solid $color-gray_01;
     }
   }
 }
