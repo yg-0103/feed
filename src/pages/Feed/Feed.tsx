@@ -15,7 +15,6 @@ import SkeletonItem from 'components/SkeletonItem/SkeletonItem';
 import { limit } from 'constant';
 import { useLocalstorage } from 'hooks/useLocalstorage';
 import { getFeedCategoryThunk } from 'modules/feedCategory';
-import { asyncInfinityScroll } from 'utils/asyncInfinityScroll';
 import { getCategoryId } from 'utils/getCategoryId';
 
 function Feed() {
@@ -46,14 +45,20 @@ function Feed() {
     );
   };
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = useCallback(async () => {
     if (!feedState) return;
     if (pageRef.current >= feedState.last_page) return;
 
-    asyncInfinityScroll(
-      dispatch,
-      loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
-    );
+    const {
+      scrollHeight,
+      clientHeight,
+      scrollTop,
+    } = document.scrollingElement as Element;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      dispatch(
+        loadMoreFeedThunk(sortState, feedCategory.join(''), ++pageRef.current)
+      );
+    }
   }, [dispatch, feedCategory, sortState, feedState]);
 
   useEffect(() => {
